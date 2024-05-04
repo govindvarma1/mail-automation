@@ -6,7 +6,7 @@ const router = express.Router();
 //     res.send("under work");
 // })
 
-router.get("/send-mails", SendMails);
+router.post("/send-mails", SendMails);
 
 export default router
 
