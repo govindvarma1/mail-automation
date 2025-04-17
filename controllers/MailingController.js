@@ -3,6 +3,7 @@ import { sendMail } from "../services/NodeMailerServices.js";
 
 export const  SendMails = async(req, res, next) => {
     try {
+        const sentEmails = [];
         const {from, to} = req.body;
         const auth = await getAuth();
         const spreadsheetId = process.env.SHEET_ID;
@@ -10,13 +11,16 @@ export const  SendMails = async(req, res, next) => {
         for(let i=0; i<sheets.values.length; i++) {
             if(sheets.values[i][0] == "" || sheets.values[i][2] == "") {
                 console.log("Fields are empty");
-                return res.status(400).json({error: "Some Fields are missing"})
-            } else {
+            } else if(sheets.values[i][5] == "Yes") {
+                console.log("Already sent mail to this person", sheets.values[i][0]);
+            }
+            else {
                 sendMail(i, sheets, from);
+                sentEmails.push(sheets.values[i][1]);
                 updateSpreadSheetsValues({spreadsheetId, auth, range: `FOOD_COUPONS_QR!F${i+from}:F${i+from}`, data: [["Yes"]]});
             }
         }
-        res.status(200).json({msg: "Sucessfully sent mails", sheets: sheets})
+        res.status(200).json({msg: "Successfully sent mails", sentEmails: sentEmails});
     } catch(ex) {
         next(ex)        
     }
