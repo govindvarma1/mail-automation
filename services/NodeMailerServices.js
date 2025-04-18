@@ -83,10 +83,10 @@ export const sendMail = (row, sheets, from) => {
     <div class="container">
         <p>Dear <b>${sheets.values[row][0]}</b>,</p>
         <p>Wish you and your family a very <b>Happy Ugadi!</b></p>
-        <p>We invite you to join us at Auditorium 1, Convention Centre on 19th April to celebrate the festival of Ugadi - Telugu New Year from 6.30 PM onwards & enjoy the delicious <b>Telugu Bojanam.</b></p>
+        <p>We invite you to join us at Auditorium 1, Convention Centre on 19th April to celebrate the festival of Ugadi - Telugu New Year from 5:30 PM onwards & enjoy the delicious <b>Telugu Bojanam.</b></p>
         <img class="qr-code" src="data:image/png;base64,${base64Image}" alt="QR Code">
         <p class="note">NOTE:<br/>
-            1. The food will be served from 7.30 pm onwards outside the Convention Centre.<br/>
+            1. The food will be served from 7.30 pm onwards Cafeteria, Convention Centre.<br/>
             2. Reach there with the QR Code Coupon given above to avail the food facility.<br/>
             3. <span class="warning">The coupon is Unique & ${upperCaseFirst(converter.toWords(sheets.values[row][3]))} Time/Times Redeemable.</span> So make sure you are not sharing the link with anyone else.<br/>
         </p>
